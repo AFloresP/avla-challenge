@@ -1,0 +1,34 @@
+<div class="content" role="main" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <dx-button text="Volver a inicio" stylingMode="outlined" type="default" (onClick)="fnGoToHome()">
+                </dx-button>
+            </div>
+            <div class="col-12 mt-1 text-center">
+                <strong>{{ bikes.length + ' resultados' }}</strong>
+            </div>
+            <div class="col-12 mt-2">
+                <dx-data-grid id="gridContainer" [dataSource]="bikes" keyExpr="id" [columnAutoWidth]="true"
+                    [showBorders]="true" dataRowTemplate="dataRowTemplateName">
+                    <dxi-column caption="Foto" [width]="200" [allowFiltering]="false" [allowSorting]="false"></dxi-column>
+                    <dxi-column dataField="model" [width]="100" caption="Modelo"></dxi-column>
+                    <dxi-column dataField="color" [width]="100" caption="Color"></dxi-column>
+                    <dxi-column dataField="location" caption="Ubicacion"></dxi-column>
+                    <dxi-column dataField="available_date" [width]="120" dataType="date" caption="Fecha disponible"></dxi-column>
+                    <dxi-column dataField="distance" [width]="160" caption="Distancia" sortOrder="asc" alignment="right"></dxi-column>
+                    <ng-container *dxTemplate="let bike of 'dataRowTemplateName'">
+                        <tr class="main-row">
+                            <td rowspan="2"><img [src]="bike.data.photo" width="100%" /></td>
+                            <td>{{ bike.data.model }}</td>
+                            <td>{{ bike.data.color }}</td>
+                            <td>{{ bike.data.location }}</td>
+                            <td>{{ bike.data.available_date | date: "dd/MM/yyyy" }}</td>
+                            <td align="right">{{ (bike.data.distance) ? bike.data.distance.toFixed(6) : bike.data.distance }}</td>
+                        </tr>
+                    </ng-container>
+                </dx-data-grid>
+            </div>
+        </div>
+    </div>
+</div>
